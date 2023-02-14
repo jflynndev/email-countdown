@@ -1,0 +1,36 @@
+New Folder
+
+Open Terminal to Folder
+
+Init package
+>npm init
+
+Install express server
+>npm install express
+
+Setup a watcher to detect changes and restart the server
+>npm install nodemon --save-dev
+
+Create a server.js to confiture express and paste the following
+var express = require('express'),
+    app = express(),
+    port = process.env.PORT || 4000;
+ 
+app.listen(port, () => {
+    console.log('Server started on: ' + "http://localhost:" + port);
+});
+// request handlers
+app.get('/', (req, res) => {
+  res.send('Welcome to the first Node.js Tutorial! - Clue Mediator');
+});
+
+To finish setting up the watcher add the following under the scripts of the package.json file
+"serve": "nodemon server.js",
+
+run your server
+>node server
+
+--------------------
+
+Install gifencoder and canvas
+>npm i gifencoder canvas
