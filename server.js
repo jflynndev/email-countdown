@@ -25,6 +25,9 @@ app.get('/countdown', (req, res) => {
   const width = 500;
   const height = 100;
 
+  const { registerFont, createCanvas } = require('canvas')
+  registerFont('./fonts/Inter-Regular.ttf', { family: 'Inter' })
+
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
@@ -75,6 +78,7 @@ app.get('/countdown', (req, res) => {
   //let seconds = Math.floor((dateDiff % (1000 * 60)) / 1000);
     
 
+
     //Background Color
     //ctx.fillStyle = '#FFFF00';
     //ctx.fillRect(0, 0, width, height);
@@ -86,7 +90,8 @@ app.get('/countdown', (req, res) => {
         
         ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
 
-        ctx.font = '45px Impact'
+        //ctx.font = '45px Impact'        
+        ctx.font = '45px "Inter"'
         ctx.fillStyle = "#FFFFFF";
 
         let seconds = i
