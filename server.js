@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 //Example email page requesting image
 app.get('/', (req, res) => {
-  res.send('Dynamic Image - Jan 27, 2024 11:20:00 <br> <img src="/countdown">');
+  res.send('Dynamic Image - April 4, 2023 00:00:00 <br> <img src="/countdown">');
 })
 
 
@@ -37,7 +37,7 @@ app.get('/countdown', (req, res) => {
   encoder.setQuality(10);
 
   // Countdown date to
-  let countDownDate = new Date("Jan 27, 2024 11:20:00").getTime();
+  let countDownDate = new Date("April 4, 2023 00:00:00").getTime();
 
   //about 40 time zones
   console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
