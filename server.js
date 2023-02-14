@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 //Example email page requesting image
 app.get('/', (req, res) => {
-  res.send('Dynamic Image - Jan 27, 2024 11:20:00 <br> <img src="http://localhost:4000/countdown">');
+  res.send('Dynamic Image - Jan 27, 2024 11:20:00 <br> <img src="/countdown">');
 })
 
 
@@ -102,8 +102,8 @@ app.get('/countdown', (req, res) => {
       encoder.finish();
       //res.send('Dynamic Image <br> <img src="/countdown-img.gif">');
       
-      
-      const url = 'http://localhost:4000/countdown-img.gif';
+      let rootURL = req.protocol + "://" + req.get('host');
+      const url = rootURL + '/countdown-img.gif';
 
       request({
         url: url,
