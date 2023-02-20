@@ -15,23 +15,23 @@ app.use(express.static('public'));
 
 //Example email page requesting image
 app.get('/', (req, res) => {
-  res.send('Dynamic Image - April 4, 2023 00:00:00 <br> <img src="/countdown">');
+  res.send('Dynamic Image - March 20, 2023 00:00:00 <br> <img src="/countdown">');
 })
 
 
 //Generate countdown animated gif
 app.get('/countdown', (req, res) => {
 
-  //about 40 time zones
-  //https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  //Current time zone from machine
   //console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
+  process.env.TZ = 'UTC'
 
   //Set Time Zone per guest
   let setTimeZone = 'UTC'
   if( req.query.tz != undefined){
     setTimeZone = req.query.tz
   }
-  //process.env.TZ = setTimeZone
   console.log(setTimeZone)
 
   const width = 500;
@@ -52,7 +52,7 @@ app.get('/countdown', (req, res) => {
   encoder.setQuality(10);
 
   // Countdown date to
-  let futureDate = "April 4, 2023 00:00:00"
+  let futureDate = "2023-03-20T00:00:00"
   if( req.query.fd != undefined){
     futureDate = req.query.fd
   }
@@ -153,8 +153,3 @@ app.listen(port, () => {
   console.log('Server started on: ' + "http://localhost:" + port);
 });
 
-//http://localhost:4000/countdown?tz=America/Chicago&fd=2014-01-02T03:04:05
-// Test server
-// https://dashboard.render.com/
-// https://email-countdown-test.onrender.com/
-//
