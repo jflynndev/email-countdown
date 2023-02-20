@@ -84,6 +84,7 @@ app.get('/countdown', (req, res) => {
   if(hours < 0){
     hours = "00"
   }
+  console.log("hours:", hours)
   let minutes = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
   if(minutes < 10 && minutes >= 0){
     minutes = "0" + minutes
