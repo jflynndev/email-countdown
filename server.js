@@ -53,27 +53,18 @@ app.get('/countdown', (req, res) => {
 
   // Countdown date to
   let futureDate = "April 4, 2023 00:00:00"
-  //let futureDate = "February 20 2023 12:24:00"
+  if( req.query.fd != undefined){
+    futureDate = req.query.fd
+  }
+  console.log('Future Date:', futureDate)
   let countDownDate = new Date(futureDate).getTime();
-
+  console.log(countDownDate)
+  
   // Today's date and time per time zone
   let getDateNow = new Date().toLocaleString('en-US', { timeZone: setTimeZone });
-  console.log(getDateNow)
+  console.log('Current Date:', getDateNow)
   let dateNow = new Date(getDateNow)
 
-  //var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  //console.log( dateNow.toLocaleString('en-US', { timeZone: setTimeZone }) )
-  //console.log((dateNow.getUTCMonth()+1) +"/"+  dateNow.getUTCDate() +"/"+ d.getUTCFullYear() + " " + dateNow.getUTCHours() + ":" + dateNow.getUTCMinutes() + ":" + dateNow.getUTCSeconds())
-
-  /*
-  let d = new Date();
-  var now_utc = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
-                d.getUTCDate(), d.getUTCHours(),
-                d.getUTCMinutes(), d.getUTCSeconds());
-  console.log(now_utc)
-  const convDate = new Date(now_utc);
-  console.log(convDate.toLocaleString())
-  */
 
   // Difference between now and the countdown date
   let dateDiff = countDownDate - dateNow;
@@ -162,7 +153,7 @@ app.listen(port, () => {
   console.log('Server started on: ' + "http://localhost:" + port);
 });
 
-
+//http://localhost:4000/countdown?tz=America/Chicago&fd=2014-01-02T03:04:05
 // Test server
 // https://dashboard.render.com/
 // https://email-countdown-test.onrender.com/
