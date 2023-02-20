@@ -22,6 +22,18 @@ app.get('/', (req, res) => {
 //Generate countdown animated gif
 app.get('/countdown', (req, res) => {
 
+  //about 40 time zones
+  //https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  //console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
+  //Set Time Zone per guest
+  let setTimeZone = 'UTC'
+  if( req.query.tz != undefined){
+    setTimeZone = req.query.tz
+  }
+  //process.env.TZ = setTimeZone
+  console.log(setTimeZone)
+
   const width = 500;
   const height = 100;
 
@@ -40,15 +52,28 @@ app.get('/countdown', (req, res) => {
   encoder.setQuality(10);
 
   // Countdown date to
-  let countDownDate = new Date("April 4, 2023 00:00:00").getTime();
+  let futureDate = "April 4, 2023 00:00:00"
+  //let futureDate = "February 20 2023 12:24:00"
+  let countDownDate = new Date(futureDate).getTime();
 
-  //about 40 time zones
-  console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+  // Today's date and time per time zone
+  let getDateNow = new Date().toLocaleString('en-US', { timeZone: setTimeZone });
+  console.log(getDateNow)
+  let dateNow = new Date(getDateNow)
 
-  // Today's date and time
-  let dateNow = new Date().getTime();
+  //var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  //console.log( dateNow.toLocaleString('en-US', { timeZone: setTimeZone }) )
+  //console.log((dateNow.getUTCMonth()+1) +"/"+  dateNow.getUTCDate() +"/"+ d.getUTCFullYear() + " " + dateNow.getUTCHours() + ":" + dateNow.getUTCMinutes() + ":" + dateNow.getUTCSeconds())
+
+  /*
   let d = new Date();
-  console.log(d.toString())
+  var now_utc = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
+                d.getUTCDate(), d.getUTCHours(),
+                d.getUTCMinutes(), d.getUTCSeconds());
+  console.log(now_utc)
+  const convDate = new Date(now_utc);
+  console.log(convDate.toLocaleString())
+  */
 
   // Difference between now and the countdown date
   let dateDiff = countDownDate - dateNow;
@@ -137,3 +162,8 @@ app.listen(port, () => {
   console.log('Server started on: ' + "http://localhost:" + port);
 });
 
+
+// Test server
+// https://dashboard.render.com/
+// https://email-countdown-test.onrender.com/
+//
